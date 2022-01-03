@@ -22,12 +22,12 @@ func Provider() *schema.Provider {
 // More info in https://github.com/hashicorp/terraform/blob/v0.6.6/helper/schema/schema.go#L29-L142
 func providerSchema() map[string]*schema.Schema {
 	return map[string]*schema.Schema{
-		"hosts": {
+		"hosts": &schema.Schema{
 			Type:        schema.TypeMap,
 			Required:    true,
 			Description: "Host addresses of the SmartOS global zone.",
 		},
-		"user": {
+		"user": &schema.Schema{
 			Type:        schema.TypeString,
 			Required:    true,
 			Description: "User to authenticate with.",
@@ -37,13 +37,13 @@ func providerSchema() map[string]*schema.Schema {
 
 func providerResources() map[string]*schema.Resource {
 	return map[string]*schema.Resource{
-		"smartos_machine": resourceMachine(),
+		"smartos-cluster_machine": resourceMachine(),
 	}
 }
 
 func providerDataSources() map[string]*schema.Resource {
 	return map[string]*schema.Resource{
-		"smartos_image": datasourceImage(),
+		"smartos-cluster_image": datasourceImage(),
 	}
 }
 

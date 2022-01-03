@@ -12,15 +12,15 @@ func datasourceImage() *schema.Resource {
 		SchemaVersion: 1,
 		Read:          datasourceImageReadRunc,
 		Schema: map[string]*schema.Schema{
-			"name": {
+			"name": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
 			},
-			"version": {
+			"version": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
 			},
-			"node_name": {
+			"node_name": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
 			},

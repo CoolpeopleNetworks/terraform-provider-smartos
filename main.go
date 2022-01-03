@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/coolpeoplenetworks/terraform-provider-smartos/smartos"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/plugin"
+
+	"terraform-provider-smartos/smartos"
 )
 
 func main() {

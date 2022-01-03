@@ -109,7 +109,7 @@ func (c *SmartOSClient) CreateMachine(nodeName string, machine *Machine) (*uuid.
 	log.Println("SSH execute: vmadm create")
 	err = session.Run("vmadm create")
 	if err != nil {
-		return nil, fmt.Errorf("remote command vmadm failed.  Error: %s (%s)", err, b.String())
+		return nil, fmt.Errorf("Remote command vmadm failed.  Error: %s (%s)\n", err, b.String())
 	}
 
 	output := b.String()
@@ -119,7 +119,7 @@ func (c *SmartOSClient) CreateMachine(nodeName string, machine *Machine) (*uuid.
 	matches := re.FindStringSubmatch(output)
 
 	if len(matches) != 2 {
-		return nil, fmt.Errorf("unrecognized response from vmadm: %s", output)
+		return nil, fmt.Errorf("Unrecognized response from vmadm: %s", output)
 	}
 
 	log.Println("Matched regex: ", matches[1])
@@ -153,7 +153,7 @@ func (c *SmartOSClient) GetMachine(nodeName string, id uuid.UUID) (*Machine, err
 	log.Println("SSH execute: vmadm get", id.String())
 	err = session.Run("vmadm get " + id.String())
 	if err != nil {
-		return nil, fmt.Errorf("remote command vmadm failed.  Error: %s (%s)", err, stderr.String())
+		return nil, fmt.Errorf("Remote command vmadm failed.  Error: %s (%s)\n", err, stderr.String())
 	}
 
 	outputBytes := b.Bytes()
@@ -203,7 +203,7 @@ func (c *SmartOSClient) UpdateMachine(nodeName string, machine *Machine) error {
 	log.Println("SSH execute: vmadm update" + machine.ID.String())
 	err = session.Run("vmadm update " + machine.ID.String())
 	if err != nil {
-		return fmt.Errorf("remote command vmadm failed.  Error: %s (%s)", err, b.String())
+		return fmt.Errorf("Remote command vmadm failed.  Error: %s (%s)\n", err, b.String())
 	}
 
 	output := b.String()
@@ -231,7 +231,7 @@ func (c *SmartOSClient) DeleteMachine(nodeName string, id uuid.UUID) error {
 	log.Println("SSH execute: vmadm delete ", id.String())
 	err = session.Run("vmadm delete " + id.String())
 	if err != nil {
-		return fmt.Errorf("remote command vmadm failed.  Error: %s", err)
+		return fmt.Errorf("Remote command vmadm failed.  Error: %s\n", err)
 	}
 
 	output := b.String()
@@ -241,7 +241,7 @@ func (c *SmartOSClient) DeleteMachine(nodeName string, id uuid.UUID) error {
 	matches := re.FindStringSubmatch(output)
 
 	if len(matches) != 2 {
-		return fmt.Errorf("unrecognized response from vmadm: %s", output)
+		return fmt.Errorf("Unrecognized response from vmadm: %s", output)
 	}
 
 	return nil
@@ -269,7 +269,7 @@ func (c *SmartOSClient) GetLocalImage(nodeName string, name string, version stri
 	command := fmt.Sprintf("imgadm list -j name=%s version=%s", name, version)
 	err = session.Run(command)
 	if err != nil {
-		return nil, fmt.Errorf("remote command vmadm failed.  Error: %s (%s)", err, stderr.String())
+		return nil, fmt.Errorf("Remote command vmadm failed.  Error: %s (%s)\n", err, stderr.String())
 	}
 
 	outputBytes := b.Bytes()
@@ -296,10 +296,6 @@ func (c *SmartOSClient) GetLocalImage(nodeName string, name string, version stri
 	image.Version = manifest["version"].(string)
 
 	imageID, err := uuid.Parse(manifest["uuid"].(string))
-	if err != nil {
-		log.Printf("Failed to parse uuid: %s", err)
-		return nil, err
-	}
 	image.ID = &imageID
 
 	return &image, nil
@@ -327,7 +323,7 @@ func (c *SmartOSClient) FindRemoteImage(nodeName string, name string, version st
 	command := fmt.Sprintf("imgadm avail -j name=%s version=%s", name, version)
 	err = session.Run(command)
 	if err != nil {
-		return nil, fmt.Errorf("remote command vmadm failed.  Error: %s (%s)", err, stderr.String())
+		return nil, fmt.Errorf("Remote command vmadm failed.  Error: %s (%s)\n", err, stderr.String())
 	}
 
 	outputBytes := b.Bytes()
@@ -354,10 +350,6 @@ func (c *SmartOSClient) FindRemoteImage(nodeName string, name string, version st
 	image.Version = manifest["version"].(string)
 
 	imageID, err := uuid.Parse(manifest["uuid"].(string))
-	if err != nil {
-		log.Printf("Failed to parse uuid: %s", err)
-		return nil, err
-	}
 	image.ID = &imageID
 
 	return &image, nil
@@ -387,7 +379,7 @@ func (c *SmartOSClient) ImportRemoteImage(nodeName string, uuid uuid.UUID) error
 	command := fmt.Sprintf("imgadm import %s", uuid.String())
 	err = session.Run(command)
 	if err != nil {
-		return fmt.Errorf("remote command vmadm failed.  Error: %s (%s)", err, stderr.String())
+		return fmt.Errorf("Remote command vmadm failed.  Error: %s (%s)\n", err, stderr.String())
 	}
 
 	outputBytes := b.Bytes()

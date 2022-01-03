@@ -86,6 +86,11 @@ func newUint32(value uint32) *uint32 {
 	return &n
 }
 
+func newStringMap() *map[string]string {
+	var n map[string]string
+	return &n
+}
+
 func (m *Machine) LoadFromSchema(d *schema.ResourceData) error {
 
 	m.Alias = d.Get("alias").(string)
@@ -217,12 +222,6 @@ type NetworkInterface struct {
 	Tag          string `json:"nic_tag,omitempty"`
 	IsPrimary    *bool  `json:"primary,omitempty"`
 	VirtualLANID uint16 `json:"vlan_id,omitempty"`
-
-	/*
-		VRRP Support
-	*/
-	VRRPVRID      *uint32 `json:"vrrp_vrid,omitempty"`
-	VRRPPrimaryIP string  `json:"vrrp_primary_ip,omitempty"`
 }
 
 func getNetworkInterfaces(d interface{}) ([]NetworkInterface, error) {
@@ -272,22 +271,6 @@ func getNetworkInterfaces(d interface{}) ([]NetworkInterface, error) {
 			model = m
 		}
 
-		var vrrpVRID *uint32
-		if vrrpVRIDCheck, ok := networkInterfaceDefinition["vrrp_vrid"]; ok {
-			// BUGBUG: for some reason vrrp_vrid is always found above but when
-			// it's not specified, it comes back as zero.  This value is checked and
-			// used as a "not present" value.
-			vrid := vrrpVRIDCheck.(int)
-			if vrid > 0 {
-				vrrpVRID = newUint32(uint32(vrid))
-			}
-		}
-
-		vrrpPrimaryIP := ""
-		if m, ok := networkInterfaceDefinition["vrrp_primary_ip"].(string); ok {
-			vrrpPrimaryIP = m
-		}
-
 		networkInterface := NetworkInterface{
 			AllowRestrictedTraffic: allowRestrictedTraffic,
 			AllowIPSpoofing:        allowIPSpoofing,
@@ -298,8 +281,6 @@ func getNetworkInterfaces(d interface{}) ([]NetworkInterface, error) {
 			Gateways:               gateways,
 			VirtualLANID:           vlanID,
 			Model:                  model,
-			VRRPVRID:               vrrpVRID,
-			VRRPPrimaryIP:          vrrpPrimaryIP,
 		}
 
 		networkInterfaces = append(networkInterfaces, networkInterface)

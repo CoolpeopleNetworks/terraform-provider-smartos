@@ -17,80 +17,75 @@ func resourceMachine() *schema.Resource {
 		Delete: resourceMachineDelete,
 
 		Schema: map[string]*schema.Schema{
-			"serial_code": {
-				Type:     schema.TypeString,
-				Optional: true,
-				ForceNew: true,
-			},
-			"node_name": {
+			"node_name": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
 				ForceNew: true,
 			},
-			"alias": {
+			"alias": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
 			},
 			/*
-				"archive_on_delete": {
+				"archive_on_delete": &schema.Schema{
 					Type:     schema.TypeBool,
 					Optional: true,
 				},
 			*/
-			"autoboot": {
+			"autoboot": &schema.Schema{
 				Type:     schema.TypeBool,
 				Optional: true,
 			},
 			/*
-				"billing_id": {
+				"billing_id": &schema.Schema{
 					Type:     schema.TypeString,
 					Optional: true,
 				},
-				"bhyve_extra_opts": {
+				"bhyve_extra_opts": &schema.Schema{
 					Type:     schema.TypeString,
 					Optional: true,
 					ForceNew: true,
 				},
-				"boot": {
+				"boot": &schema.Schema{
 					Type:     schema.TypeString,
 					Optional: true,
 				},
-				"bootrom": {
+				"bootrom": &schema.Schema{
 					Type:     schema.TypeString,
 					Optional: true,
 					ForceNew: true,
 				},
 			*/
-			"brand": {
+			"brand": &schema.Schema{
 				Type:     schema.TypeString,
 				Required: true,
 				ForceNew: true,
 			},
-			"cpu_cap": {
+			"cpu_cap": &schema.Schema{
 				Type:     schema.TypeInt,
 				Optional: true,
 			},
 			/*
-				"cpu_shares": {
+				"cpu_shares": &schema.Schema{
 					Type:     schema.TypeInt,
 					Optional: true,
 				},
-					"cpu_type": {
+					"cpu_type": &schema.Schema{
 						Type:     schema.TypeString,
 						Optional: true,
 						ForceNew: true,
 					},
 			*/
-			"customer_metadata": {
+			"customer_metadata": &schema.Schema{
 				Type:     schema.TypeMap,
 				Optional: true,
 			},
-			"metadata": {
+			"metadata": &schema.Schema{
 				Type:     schema.TypeMap,
 				Computed: true,
 			},
 			/*
-				"delegate_dataset": {
+				"delegate_dataset": &schema.Schema{
 					Type:     schema.TypeBool,
 					Optional: true,
 				},
@@ -101,32 +96,32 @@ func resourceMachine() *schema.Resource {
 				ForceNew: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						"boot": {
+						"boot": &schema.Schema{
 							Type:     schema.TypeBool,
 							Optional: true,
 							ForceNew: true,
 						},
-						"compression": {
+						"compression": &schema.Schema{
 							Type:     schema.TypeString,
 							Optional: true,
 							ForceNew: true,
 						},
-						"image_uuid": {
+						"image_uuid": &schema.Schema{
 							Type:     schema.TypeString,
 							Optional: true,
 							ForceNew: true,
 						},
-						"image_size": { // in MiB
+						"image_size": &schema.Schema{ // in MiB
 							Type:     schema.TypeInt,
 							Optional: true,
 							ForceNew: true,
 						},
-						"model": {
+						"model": &schema.Schema{
 							Type:     schema.TypeString,
 							Optional: true,
 							ForceNew: true,
 						},
-						"size": { // in MiB
+						"size": &schema.Schema{ // in MiB
 							Type:     schema.TypeInt,
 							Optional: true,
 							ForceNew: true,
@@ -135,127 +130,127 @@ func resourceMachine() *schema.Resource {
 				},
 			},
 			/*
-				"disk_driver": {
+				"disk_driver": &schema.Schema{
 					Type:     schema.TypeString,
 					Optional: true,
 					ForceNew: true,
 				},
-				"do_not_inventory": {
+				"do_not_inventory": &schema.Schema{
 					Type:     schema.TypeBool,
 					Optional: true,
 				},
-				"dns_domain": {
+				"dns_domain": &schema.Schema{
 					Type:     schema.TypeString,
 					Optional: true,
 				},
 				// "filesystems.*"
-				"firewall_enabled": {
+				"firewall_enabled": &schema.Schema{
 					Type:     schema.TypeBool,
 					Optional: true,
 				},
-				"flexible_disk_size": {
+				"flexible_disk_size": &schema.Schema{
 					Type:     schema.TypeInt,
 					Optional: true,
 				},
-				"fs_allowed": {
+				"fs_allowed": &schema.Schema{
 					Type:     schema.TypeString,
 					Optional: true,
 				},
-				"hostname": {
+				"hostname": &schema.Schema{
 					Type:     schema.TypeString,
 					Optional: true,
 				},
 			*/
-			"image_uuid": {
+			"image_uuid": &schema.Schema{
 				Type:     schema.TypeString,
 				Optional: true,
 				ForceNew: true,
 			},
 			/*
-				"internal_metadata": {
+				"internal_metadata": &schema.Schema{
 					Type:     schema.TypeList,
 					Optional: true,
-					Elem: {
+					Elem: &schema.Schema{
 						Type: schema.TypeString,
 					},
 				},
-				"internal_metadata_namespaces": {
+				"internal_metadata_namespaces": &schema.Schema{
 					Type:     schema.TypeList,
 					Optional: true,
-					Elem: {
+					Elem: &schema.Schema{
 						Type: schema.TypeString,
 					},
 				},
-				"indestructible_delegated": {
+				"indestructible_delegated": &schema.Schema{
 					Type:     schema.TypeBool,
 					Optional: true,
 				},
-				"indestructible_zoneroot": {
+				"indestructible_zoneroot": &schema.Schema{
 					Type:     schema.TypeBool,
 					Optional: true,
 				},
 			*/
-			"kernel_version": {
+			"kernel_version": &schema.Schema{
 				Type:     schema.TypeString,
 				Optional: true,
 				ForceNew: true,
 			},
 			/*
-				"limit_priv": {
+				"limit_priv": &schema.Schema{
 					Type:     schema.TypeString,
 					Optional: true,
 				},
 			*/
-			"maintain_resolvers": {
+			"maintain_resolvers": &schema.Schema{
 				Type:     schema.TypeBool,
 				Optional: true,
 			},
 			/*
-				"max_locked_memory": {
+				"max_locked_memory": &schema.Schema{
 					Type:     schema.TypeInt,
 					Optional: true,
 				},
-				"max_lwps": {
+				"max_lwps": &schema.Schema{
 					Type:     schema.TypeInt,
 					Optional: true,
 				},
 			*/
-			"max_physical_memory": {
+			"max_physical_memory": &schema.Schema{
 				Type:     schema.TypeInt,
 				Optional: true,
 			},
 			/*
-				"max_swap": {
+				"max_swap": &schema.Schema{
 					Type:     schema.TypeInt,
 					Optional: true,
 				},
-				"mdata_exec_timeout": {
+				"mdata_exec_timeout": &schema.Schema{
 					Type:     schema.TypeInt,
 					Optional: true,
 				},
 			*/
-			"nics": {
+			"nics": &schema.Schema{
 				Type:     schema.TypeList,
 				Optional: true,
 				ForceNew: true,
 				Elem: &schema.Resource{
 					Schema: map[string]*schema.Schema{
-						"allow_restricted_traffic": {
+						"allow_restricted_traffic": &schema.Schema{
 							Type:     schema.TypeBool,
 							Optional: true,
 							ForceNew: true,
 						},
-						"allow_ip_spoofing": {
+						"allow_ip_spoofing": &schema.Schema{
 							Type:     schema.TypeBool,
 							Optional: true,
 							ForceNew: true,
 						},
-						"allow_mac_spoofing": {
+						"allow_mac_spoofing": &schema.Schema{
 							Type:     schema.TypeBool,
 							Optional: true,
 							ForceNew: true,
 						},
-						"gateways": {
+						"gateways": &schema.Schema{
 							Type:     schema.TypeList,
 							Optional: true,
 							ForceNew: true,
@@ -263,12 +258,12 @@ func resourceMachine() *schema.Resource {
 								Type: schema.TypeString,
 							},
 						},
-						"interface": {
+						"interface": &schema.Schema{
 							Type:     schema.TypeString,
 							Required: true,
 							ForceNew: true,
 						},
-						"ips": {
+						"ips": &schema.Schema{
 							Type:     schema.TypeList,
 							Required: true,
 							ForceNew: true,
@@ -276,27 +271,12 @@ func resourceMachine() *schema.Resource {
 								Type: schema.TypeString,
 							},
 						},
-						"nic_tag": {
+						"nic_tag": &schema.Schema{
 							Type:     schema.TypeString,
 							Required: true,
 							ForceNew: true,
 						},
-						"model": {
-							Type:     schema.TypeString,
-							Optional: true,
-							ForceNew: true,
-						},
-						"vlan_id": {
-							Type:     schema.TypeInt,
-							Optional: true,
-							ForceNew: true,
-						},
-						"vrrp_vrid": {
-							Type:     schema.TypeInt,
-							Optional: true,
-							ForceNew: true,
-						},
-						"vrrp_primary_ip": {
+						"model": &schema.Schema{
 							Type:     schema.TypeString,
 							Optional: true,
 							ForceNew: true,
@@ -305,41 +285,41 @@ func resourceMachine() *schema.Resource {
 				},
 			},
 			/*
-				"nic_driver": {
+				"nic_driver": &schema.Schema{
 					Type:     schema.TypeString,
 					Optional: true,
 				},
-				"nowait": {
+				"nowait": &schema.Schema{
 					Type:     schema.TypeBool,
 					Optional: true,
 				},
-				"owner_uuid": {
+				"owner_uuid": &schema.Schema{
 					Type:     schema.TypeString,
 					Optional: true,
 				},
-				"qemu_opts": {
+				"qemu_opts": &schema.Schema{
 					Type:     schema.TypeString,
 					Optional: true,
 				},
-				"qemu_extra_opts": {
+				"qemu_extra_opts": &schema.Schema{
 					Type:     schema.TypeString,
 					Optional: true,
 				},
 			*/
-			"primary_ip": {
+			"primary_ip": &schema.Schema{
 				Type:     schema.TypeString,
 				Computed: true,
 			},
-			"quota": {
+			"quota": &schema.Schema{
 				Type:     schema.TypeInt,
 				Optional: true,
 			},
-			"ram": {
+			"ram": &schema.Schema{
 				Type:     schema.TypeInt,
 				Optional: true,
 				ForceNew: true,
 			},
-			"resolvers": {
+			"resolvers": &schema.Schema{
 				Type:     schema.TypeList,
 				Optional: true,
 				Elem: &schema.Schema{
@@ -348,86 +328,86 @@ func resourceMachine() *schema.Resource {
 			},
 			// "routes.*" - object
 			/*
-				"spice_opts": {
+				"spice_opts": &schema.Schema{
 					Type:     schema.TypeString,
 					Optional: true,
 				},
-				"spice_password": {
+				"spice_password": &schema.Schema{
 					Type:     schema.TypeString,
 					Optional: true,
 				},
-				"spice_port": {
+				"spice_port": &schema.Schema{
 					Type:     schema.TypeString,
 					Optional: true,
 				},
-				"tmpfs": {
+				"tmpfs": &schema.Schema{
 					Type:     schema.TypeInt,
 					Optional: true,
 				},
-				"uuid": {
+				"uuid": &schema.Schema{
 					Type:     schema.TypeString,
 					Optional: true,
 				},
 			*/
-			"vcpus": {
+			"vcpus": &schema.Schema{
 				Type:     schema.TypeInt,
 				Optional: true,
 				ForceNew: true,
 			},
 			/*
-				"vga": {
+				"vga": &schema.Schema{
 					Type:     schema.TypeString,
 					Optional: true,
 				},
-				"virtio_txburst": {
+				"virtio_txburst": &schema.Schema{
 					Type:     schema.TypeInt,
 					Optional: true,
 				},
-				"virtio_txtimer": {
+				"virtio_txtimer": &schema.Schema{
 					Type:     schema.TypeInt,
 					Optional: true,
 				},
-				"vnc_password": {
+				"vnc_password": &schema.Schema{
 					Type:     schema.TypeString,
 					Optional: true,
 				},
-				"vnc_port": {
+				"vnc_port": &schema.Schema{
 					Type:     schema.TypeInt,
 					Optional: true,
 				},
-				"zfs_data_compression": {
+				"zfs_data_compression": &schema.Schema{
 					Type:     schema.TypeString,
 					Optional: true,
 				},
-				"zfs_data_recsize": {
+				"zfs_data_recsize": &schema.Schema{
 					Type:     schema.TypeInt,
 					Optional: true,
 				},
-				"zfs_filesystem_limit": {
+				"zfs_filesystem_limit": &schema.Schema{
 					Type:     schema.TypeInt,
 					Optional: true,
 				},
-				"zfs_io_priority": {
+				"zfs_io_priority": &schema.Schema{
 					Type:     schema.TypeInt,
 					Optional: true,
 				},
-				"zfs_root_compression": {
+				"zfs_root_compression": &schema.Schema{
 					Type:     schema.TypeString,
 					Optional: true,
 				},
-				"zfs_root_recsize": {
+				"zfs_root_recsize": &schema.Schema{
 					Type:     schema.TypeInt,
 					Optional: true,
 				},
-				"zfs_snapshot_limit": {
+				"zfs_snapshot_limit": &schema.Schema{
 					Type:     schema.TypeInt,
 					Optional: true,
 				},
-				"zlog_max_size": {
+				"zlog_max_size": &schema.Schema{
 					Type:     schema.TypeInt,
 					Optional: true,
 				},
-				"zpool": {
+				"zpool": &schema.Schema{
 					Type:     schema.TypeString,
 					Optional: true,
 				},
