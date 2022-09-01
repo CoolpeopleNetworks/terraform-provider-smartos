@@ -32,6 +32,11 @@ func providerSchema() map[string]*schema.Schema {
 			Required:    true,
 			Description: "User to authenticate with.",
 		},
+		"sshkey": {
+			Type:        schema.TypeString,
+                        Required:    true,
+                        Description: "User's private SSH key.",
+                },
 	}
 }
 
@@ -63,6 +68,7 @@ func providerConfigure(d *schema.ResourceData) (interface{}, error) {
 		agentConnection: agentConnection,
 		authMethods:     authMethods,
 		clients:         make(map[string]*ssh.Client),
+		sshkey:          d.Get("sshkey").(string),
 	}
 
 	return &client, nil
