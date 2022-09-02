@@ -7,6 +7,7 @@ import (
 	"log"
 	"net"
 	"regexp"
+	"io/ioutil"
 
 	"github.com/google/uuid"
 	"golang.org/x/crypto/ssh"
@@ -18,6 +19,7 @@ type SmartOSClient struct {
 	clients         map[string]*ssh.Client
 	agentConnection net.Conn
 	authMethods     []ssh.AuthMethod
+	sshkey		string
 }
 
 func (c *SmartOSClient) Connect(nodeName string) error {
@@ -27,9 +29,20 @@ func (c *SmartOSClient) Connect(nodeName string) error {
 		return nil
 	}
 
+        keyfile, err := ioutil.ReadFile(c.sshkey)
+        if err != nil {
+                log.Println("SSH: Can't read key: ", err.Error())
+        }
+
+        keyparser, err := ssh.ParsePrivateKey(keyfile)
+        if err != nil {
+                log.Println("SSH: Can't parse key: ", err.Error())
+        }
+
+	
 	config := &ssh.ClientConfig{
 		User:            c.user,
-		Auth:            c.authMethods,
+		Auth:            []ssh.AuthMethod{ssh.PublicKeys(keyparser),},
 		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 	}
 
