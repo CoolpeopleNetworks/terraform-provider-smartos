@@ -281,6 +281,11 @@ func resourceMachine() *schema.Resource {
 							Optional: true,
 							ForceNew: true,
 						},
+						"vlan_id": &schema.Schema{
+							Type:     schema.TypeInt,
+							Optional: true,
+							ForceNew: true,
+						},
 					},
 				},
 			},

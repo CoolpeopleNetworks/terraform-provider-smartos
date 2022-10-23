@@ -37,13 +37,15 @@ func providerSchema() map[string]*schema.Schema {
 
 func providerResources() map[string]*schema.Resource {
 	return map[string]*schema.Resource{
-		"smartos-cluster_machine": resourceMachine(),
+		"smartos_machine": resourceMachine(),
+		"smartcluster_machine": resourceMachine(),
 	}
 }
 
 func providerDataSources() map[string]*schema.Resource {
 	return map[string]*schema.Resource{
-		"smartos-cluster_image": datasourceImage(),
+		"smartos_image": datasourceImage(),
+		"smartcluster_image": datasourceImage(),
 	}
 }
 
