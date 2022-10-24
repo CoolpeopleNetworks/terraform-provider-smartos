@@ -50,14 +50,15 @@ func providerDataSources() map[string]*schema.Resource {
 }
 
 func providerConfigure(d *schema.ResourceData) (interface{}, error) {
-	sshSocket := os.Getenv("SSH_AUTH_SOCK")
-	agentConnection, err := net.Dial("unix", sshSocket)
+	agentConnection, err := net.Dial("unix", os.Getenv("SSH_AUTH_SOCK"))
 	if err != nil {
 		return nil, err
 	}
 
-	authMethods := []ssh.AuthMethod{}
-	authMethods = append(authMethods, ssh.PublicKeysCallback(agent.NewClient(agentConnection).Signers))
+	signers := agent.NewClient(agentConnection).Signers
+	authMethods := []ssh.AuthMethod{
+		ssh.PublicKeysCallback(signers),
+	}
 
 	client := SmartOSClient{
 		hosts:           d.Get("hosts").(map[string]interface{}),
